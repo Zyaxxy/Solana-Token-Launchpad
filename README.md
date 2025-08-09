@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 # Token Launchpad (Solana Token-2022)
 
