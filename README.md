@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Token Launchpad (Solana Token-2022)
 
@@ -76,3 +77,7 @@ await connection.confirmTransaction({ signature: sig, ...(await connection.getLa
 ## License
 MIT © 2025
 
+=======
+# Solana-Token-Launchpad
+Create, customize, and deploy Solana SPL-2022 tokens instantly with a sleek React + Tailwind UI. Includes wallet connection, metadata support, and real-time transaction feedback.
+>>>>>>> 93890126363d36a07ad608b0e7d5c734ccda2249
