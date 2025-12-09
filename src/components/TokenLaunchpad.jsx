@@ -127,52 +127,55 @@ export function TokenLaunchpad() {
             await connection.confirmTransaction({ signature: sig3, ...(await connection.getLatestBlockhash()) }, 'confirmed');
 
             alert(`Token created at ${mintKeypair.publicKey.toBase58()}`);
+            setForm({ name: "", symbol: "", image: "", supply: "" }); // Reset form
         } catch (error) {
             console.error(error);
-            alert("Token creation failed!");
+            alert("Token creation failed! Check console for details.");
         } finally {
             setLoading(false);
         }
     }
 
     return (
-        <main className="min-h-screen w-full">
-            <section className="main-section w-full">
-                <div className="page-heading">
-                    <h1>Solana Token Launchpad</h1>
-                    <p className="text-dark-200 max-w-xl">
-                        Create and mint your own Token-2022 with metadata instantly.
+        <main className="w-full flex justify-center items-center p-4">
+            <section className="flex flex-col items-center gap-8 w-full max-w-4xl py-12">
+                <div className="page-heading animate-float">
+                    <h1 className="text-center">Solana Token Launchpad</h1>
+                    <p className="text-gray-400 text-lg max-w-xl text-center">
+                        Launch your own Token-2022 on Solana with metadata in seconds.
                     </p>
                 </div>
 
-                <div className="w-full max-w-2xl">
-                    <div className="gradient-border rounded-2xl">
-                        <div className="bg-white rounded-2xl p-8 shadow-lg">
-                            <form onSubmit={(e) => { e.preventDefault(); createToken(); }}>
-                                <div className="form-div">
-                                    <label htmlFor="name">Name</label>
+                <div className="w-full max-w-md">
+                    <div className="glass-panel rounded-3xl p-1">
+                        <div className="bg-dark-bg/60 backdrop-blur-sm rounded-[22px] p-8">
+                            <form onSubmit={(e) => { e.preventDefault(); createToken(); }} className="flex flex-col gap-6">
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="name" className="text-gray-300 font-medium">Token Name</label>
                                     <input
                                         id="name"
                                         type="text"
-                                        placeholder="e.g. My Token"
+                                        placeholder="e.g. Super Solana"
                                         value={form.name}
                                         onChange={handleChange}
                                         required
+                                        className="w-full"
                                     />
                                 </div>
-                                <div className="form-div">
-                                    <label htmlFor="symbol">Symbol</label>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="symbol" className="text-gray-300 font-medium">Symbol</label>
                                     <input
                                         id="symbol"
                                         type="text"
-                                        placeholder="e.g. MTK"
+                                        placeholder="e.g. SOL"
                                         value={form.symbol}
                                         onChange={handleChange}
                                         required
+                                        className="w-full"
                                     />
                                 </div>
-                                <div className="form-div">
-                                    <label htmlFor="image">Image URL</label>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="image" className="text-gray-300 font-medium">Image URL</label>
                                     <input
                                         id="image"
                                         type="url"
@@ -181,20 +184,35 @@ export function TokenLaunchpad() {
                                         onChange={handleChange}
                                     />
                                 </div>
-                                <div className="form-div">
-                                    <label htmlFor="supply">Initial Supply</label>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="supply" className="text-gray-300 font-medium">Initial Supply</label>
                                     <input
                                         id="supply"
                                         type="number"
-                                        placeholder="1000"
+                                        placeholder="1000000"
                                         value={form.supply}
                                         onChange={handleChange}
                                         required
+                                        className="w-full"
                                     />
                                 </div>
-                                <button type="submit" className="auth-button" disabled={loading}>
-                                    {loading ? "Creating..." : "Create Token"}
-                                </button>
+                                <div className="pt-2">
+                                    <button
+                                        type="submit"
+                                        className="primary-button flex justify-center items-center"
+                                        disabled={loading || !wallet.publicKey}
+                                    >
+                                        {loading ? (
+                                            <span className="flex items-center gap-2">
+                                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                Creating...
+                                            </span>
+                                        ) : "Create Token"}
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>
