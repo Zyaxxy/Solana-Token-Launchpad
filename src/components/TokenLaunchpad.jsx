@@ -146,7 +146,7 @@ export function TokenLaunchpad() {
                     </p>
                 </div>
 
-                <div className="w-full max-w-md">
+                <div className="w-full max-w-2xl">
                     <div className="glass-panel rounded-3xl p-1">
                         <div className="bg-dark-bg/60 backdrop-blur-sm rounded-[22px] p-8">
                             <form onSubmit={(e) => { e.preventDefault(); createToken(); }} className="flex flex-col gap-6">
