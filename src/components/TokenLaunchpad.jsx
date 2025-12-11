@@ -14,6 +14,16 @@ import {
 } from "@solana/spl-token";
 import { createInitializeInstruction, pack } from '@solana/spl-token-metadata';
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+    CardDescription
+} from "@/components/ui/card";
 
 export function TokenLaunchpad() {
     const { connection } = useConnection();
@@ -146,77 +156,76 @@ export function TokenLaunchpad() {
                     </p>
                 </div>
 
-                <div className="w-full max-w-2xl">
-                    <div className="glass-panel rounded-3xl p-1">
-                        <div className="bg-dark-bg/60 backdrop-blur-sm rounded-[22px] p-8">
-                            <form onSubmit={(e) => { e.preventDefault(); createToken(); }} className="flex flex-col gap-6">
-                                <div className="flex flex-col gap-2">
-                                    <label htmlFor="name" className="text-gray-300 font-medium">Token Name</label>
-                                    <input
-                                        id="name"
-                                        type="text"
-                                        placeholder="e.g. Super Solana"
-                                        value={form.name}
-                                        onChange={handleChange}
-                                        required
-                                        className="w-full"
-                                    />
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <label htmlFor="symbol" className="text-gray-300 font-medium">Symbol</label>
-                                    <input
-                                        id="symbol"
-                                        type="text"
-                                        placeholder="e.g. SOL"
-                                        value={form.symbol}
-                                        onChange={handleChange}
-                                        required
-                                        className="w-full"
-                                    />
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <label htmlFor="image" className="text-gray-300 font-medium">Image URL</label>
-                                    <input
-                                        id="image"
-                                        type="url"
-                                        placeholder="https://..."
-                                        value={form.image}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <label htmlFor="supply" className="text-gray-300 font-medium">Initial Supply</label>
-                                    <input
-                                        id="supply"
-                                        type="number"
-                                        placeholder="1000000"
-                                        value={form.supply}
-                                        onChange={handleChange}
-                                        required
-                                        className="w-full"
-                                    />
-                                </div>
-                                <div className="pt-2">
-                                    <button
-                                        type="submit"
-                                        className="primary-button flex justify-center items-center"
-                                        disabled={loading || !wallet.publicKey}
-                                    >
-                                        {loading ? (
-                                            <span className="flex items-center gap-2">
-                                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                                </svg>
-                                                Creating...
-                                            </span>
-                                        ) : "Create Token"}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <Card className="w-full max-w-4xl bg-dark-card/50 backdrop-blur-xl border-dark-border shadow-2xl">
+                    <CardHeader>
+                        <CardTitle>Token Details</CardTitle>
+                        <CardDescription>Enter the specifications for your new token.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <form onSubmit={(e) => { e.preventDefault(); createToken(); }} className="flex flex-col gap-6">
+                            <div className="flex flex-col gap-2">
+                                <Label htmlFor="name">Token Name</Label>
+                                <Input
+                                    id="name"
+                                    type="text"
+                                    placeholder="e.g. Super Solana"
+                                    value={form.name}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <Label htmlFor="symbol">Symbol</Label>
+                                <Input
+                                    id="symbol"
+                                    type="text"
+                                    placeholder="e.g. SOL"
+                                    value={form.symbol}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <Label htmlFor="image">Image URL</Label>
+                                <Input
+                                    id="image"
+                                    type="url"
+                                    placeholder="https://..."
+                                    value={form.image}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <Label htmlFor="supply">Initial Supply</Label>
+                                <Input
+                                    id="supply"
+                                    type="number"
+                                    placeholder="1000000"
+                                    value={form.supply}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="pt-2">
+                                <Button
+                                    type="submit"
+                                    className="w-full"
+                                    disabled={loading || !wallet.publicKey}
+                                >
+                                    {loading ? (
+                                        <span className="flex items-center gap-2">
+                                            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Creating...
+                                        </span>
+                                    ) : "Create Token"}
+                                </Button>
+                            </div>
+                        </form>
+                    </CardContent>
+                </Card>
             </section>
         </main>
     );

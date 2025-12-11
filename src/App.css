@@ -37,16 +37,7 @@ label {
   @apply text-text-muted text-sm font-medium ml-1;
 }
 
-input {
-  @apply w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 transition-all duration-300;
-  &:focus {
-    @apply outline-none border-indigo-500/50 bg-white/10 shadow-[0_0_15px_rgba(99,102,241,0.3)];
-  }
-}
 
-textarea {
-  @apply w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-indigo-500/50 transition-all duration-300;
-}
 
 form {
   @apply flex flex-col items-start gap-6 w-full;
